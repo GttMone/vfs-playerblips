@@ -55,6 +55,8 @@ on('onResourceStop', (resource) => {
     clearBlips();
 })
 
+emit('chat:addSuggestion', `/${Config.Command}`, `Toggle player blips ${Config.RequiredGroup ? `(${Config.RequiredGroup} only)` : ''}`);
+
 function clearBlips() {
     blips.forEach(blip_ => {
         const blip = blip_.blip;

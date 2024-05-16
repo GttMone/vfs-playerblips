@@ -1,7 +1,7 @@
 let Config = {};
 
 Config.Command = 'blips' // Command to toggle blips on/off.
-Config.RequiredGroup = 'admin' // Required user group to use the command
+Config.RequiredGroup = 'admin' // Required user group to use the command. Set to false to allow anyone.
 
 Config.UpdateInterval = 5; // Update interval in seconds (only updates if more than one admin has blips enabled)
 Config.OfflineTimeout = 60 // After how many seconds a blip gets deleted when the player has gone offline.

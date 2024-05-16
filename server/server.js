@@ -5,8 +5,10 @@ let listeningPlayers = [];
 let updateInterval;
 
 RegisterCommand(Config.Command, (source) => {
-    const player = VORPcore.getUser(source);
-    if (player.getGroup !== Config.RequiredGroup) return Notify(source, Lang.Notifications.no_permissions);
+    if (Config.RequiredGroup) {
+        const player = VORPcore.getUser(source);
+        if (player.getGroup !== Config.RequiredGroup) return Notify(source, Lang.Notifications.no_permissions);
+    }
 
 
     if (listeningPlayers.includes(source)) {
