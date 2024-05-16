@@ -30,10 +30,10 @@ function updateBlips() {
 
     const players = getPlayers();
     playerPositions = players.map(src => {
-        const char = VORPcore.getUser(src).getUsedCharacter;
+        const char = VORPcore.getUser(src)?.getUsedCharacter;
         return {
             src: src,
-            name: `${char.firstname || '?'} ${char.lastname || '?'} (${GetPlayerName(src)})`,
+            name: `${char?.firstname || '?'} ${char?.lastname || '?'} (${GetPlayerName(src)})`,
             position: GetEntityCoords(GetPlayerPed(src))
         }
     });
