@@ -10,7 +10,6 @@ RegisterCommand(Config.Command, (source) => {
         if (player.getGroup !== Config.RequiredGroup) return Notify(source, Lang.Notifications.no_permissions);
     }
 
-
     if (listeningPlayers.includes(source)) {
         listeningPlayers = listeningPlayers.filter(src => src !== source);
         TriggerClientEvent('vfs-playerblips:client:Clear', source);
@@ -34,7 +33,7 @@ function updateBlips() {
         const char = VORPcore.getUser(src).getUsedCharacter;
         return {
             src: src,
-            name: `${char.firstname} ${char.lastname} (${GetPlayerName(src)})`,
+            name: `${char.firstname || '?'} ${char.lastname || '?'} (${GetPlayerName(src)})`,
             position: GetEntityCoords(GetPlayerPed(src))
         }
     });
@@ -45,14 +44,17 @@ function updateBlips() {
 }
 
 function startBlipInterval() {
+    if (updateInterval) return;
     updateBlips();
-    updateInterval = setInterval(updateBlips, Config.UpdateInterval * 1000);
+    updateInterval = setInterval(() => {
+        updateBlips();
+    }, Config.UpdateInterval * 1000);
 }
 
 function stopBlipInterval() {
     playerPositions = [];
     listeningPlayers = [];
-    if (updateInterval) clearInterval(updateInterval);
+    clearInterval(updateInterval);
     updateInterval = null;
 }
 
